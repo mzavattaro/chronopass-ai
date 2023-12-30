@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import type { ChangeEvent, FormEvent, FC } from 'react';
 import { toast } from 'sonner';
-import { imageToBlob } from '@/app/utils/blob';
+import { fileToBase64 } from '@/app/utils/fileToBase64';
 
 import styles from './UploadForm.module.css';
 
@@ -28,7 +28,8 @@ const UploadForm: FC = () => {
 
     if (file) {
       try {
-        const blob = await imageToBlob(file);
+        const base64Encoded = await fileToBase64(file);
+        console.log('base64: ', base64Encoded);
 
         toast('File uploaded successfully!', {
           style: {
