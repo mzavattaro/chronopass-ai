@@ -1,4 +1,4 @@
-export function imageToBlob(file: File): Promise<Blob> {
+export function fileToBlob(file: File): Promise<Blob> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onloadend = () =>
