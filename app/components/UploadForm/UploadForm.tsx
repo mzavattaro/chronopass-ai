@@ -39,6 +39,12 @@ const UploadForm: FC<UploadFormProps> = ({ age, setResponse }) => {
         const base64Encoded = await fileToBase64(file);
         const response = await openAI(base64Encoded as string, age);
         setResponse(response.choices[0].message.content);
+        toast('File uploaded successfully!', {
+          style: {
+            background: 'green',
+            color: 'white',
+          },
+        });
       } catch (error) {
         console.error('Error: ', error);
         toast('File upload error! Please try again later.', {
@@ -49,12 +55,6 @@ const UploadForm: FC<UploadFormProps> = ({ age, setResponse }) => {
         });
       } finally {
         setIsLoading(false);
-        toast('File uploaded successfully!', {
-          style: {
-            background: 'green',
-            color: 'white',
-          },
-        });
       }
     }
   };
