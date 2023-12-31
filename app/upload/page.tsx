@@ -2,7 +2,7 @@ import { Group } from '@mantine/core';
 import Link from 'next/link';
 import { NextPage } from 'next';
 import React from 'react';
-import UploadForm from '@/app/components/UploadForm/UploadForm';
+import VerifyAge from '@/app/components/VerifyAge/VerifyAge';
 import styles from './Page.module.css';
 
 const Page: NextPage = () => (
@@ -12,9 +12,8 @@ const Page: NextPage = () => (
         <span>Home</span>
       </Link>
     </Group>
-    <Group justify="center" mt="xl">
-      <UploadForm />
-    </Group>
+
+    <VerifyAge />
   </div>
 );
 
