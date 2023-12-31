@@ -16,6 +16,7 @@ type UploadFormProps = {
 const UploadForm: FC<UploadFormProps> = ({ age, setResponse }) => {
   const [file, setFile] = useState<File | null>(null);
   const [fileError, setFileError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const selected = event.target.files![0];
@@ -34,24 +35,23 @@ const UploadForm: FC<UploadFormProps> = ({ age, setResponse }) => {
 
     if (file) {
       try {
+        setIsLoading(true);
         const base64Encoded = await fileToBase64(file);
         const response = await openAI(base64Encoded as string, age);
-
         setResponse(response.choices[0].message.content);
-        console.log('response: ', response.choices[0].message);
-
-        toast('File uploaded successfully!', {
-          style: {
-            background: 'green',
-            color: 'white',
-          },
-        });
       } catch (error) {
-        console.error('Error converting image to blob: ', error);
-
+        console.error('Error: ', error);
         toast('File upload error! Please try again later.', {
           style: {
             background: 'red',
+            color: 'white',
+          },
+        });
+      } finally {
+        setIsLoading(false);
+        toast('File uploaded successfully!', {
+          style: {
+            background: 'green',
             color: 'white',
           },
         });
@@ -66,8 +66,16 @@ const UploadForm: FC<UploadFormProps> = ({ age, setResponse }) => {
         <input type="file" name="photo" accept=".jpeg, .jpg" onChange={handleFileChange} />
         {fileError && <div className={styles.error}>{fileError}</div>}
 
-        <button className={styles.button} type="submit">
-          Upload
+        <button
+          className={styles.button}
+          style={{
+            backgroundColor: isLoading ? 'rgba(30, 143, 255, 0.35)' : 'rgba(30, 143, 255, 1)',
+            cursor: isLoading ? 'not-allowed' : 'pointer',
+          }}
+          type="submit"
+          disabled={isLoading}
+        >
+          {isLoading ? 'Uploading...' : 'Upload'}
         </button>
       </form>
     </div>
