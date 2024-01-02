@@ -35,12 +35,12 @@ const UploadForm: FC<UploadFormProps> = ({ age, setResponse }) => {
     if (file) {
       try {
         setIsLoading(true);
-        const base64Encoded = await fileToBase64(file);
+        const base64Image = await fileToBase64(file);
 
         const response = await fetch('/api/openai', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ base64Encoded, age }),
+          body: JSON.stringify({ base64Image, age }),
         });
 
         if (!response.ok) {

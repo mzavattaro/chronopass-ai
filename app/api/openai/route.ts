@@ -5,7 +5,7 @@ if (!process.env.OPENAI_API_KEY) {
 }
 
 type Request = {
-  json: () => Promise<{ base64Encoded: string; age: string }>;
+  json: () => Promise<{ base64Image: string; age: string }>;
 };
 
 const openai = new OpenAI({
@@ -14,7 +14,7 @@ const openai = new OpenAI({
 
 export async function POST(req: Request): Promise<Response> {
   const json = await req.json();
-  const { base64Encoded, age } = json;
+  const { base64Image, age } = json;
 
   const response = await openai.chat.completions.create({
     model: 'gpt-4-vision-preview',
@@ -31,7 +31,7 @@ export async function POST(req: Request): Promise<Response> {
           {
             type: 'image_url',
             image_url: {
-              url: base64Encoded,
+              url: base64Image,
             },
           },
         ],
