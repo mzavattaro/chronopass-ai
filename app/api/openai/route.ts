@@ -4,12 +4,16 @@ if (!process.env.OPENAI_API_KEY) {
   throw new Error('OPENAI_API_KEY is not defined in the environment variables');
 }
 
+type Request = {
+  json: () => Promise<{ base64Encoded: string; age: string }>;
+};
+
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-export async function POST(req: Request) {
-  const json = (await req.json()) as { base64Encoded: string; age: string };
+export async function POST(req: Request): Promise<Response> {
+  const json = await req.json();
   const { base64Encoded, age } = json;
 
   const response = await openai.chat.completions.create({
