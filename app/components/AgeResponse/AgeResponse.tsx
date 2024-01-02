@@ -13,7 +13,7 @@ const AgeResponse: FC<AgeResponseProps> = ({ response, age }) => (
     <div
       className={styles.alert}
       style={{
-        backgroundColor: response === 'yes' ? 'green' : 'rgba(0, 128, 0, 0.35)',
+        backgroundColor: response === '1' ? 'green' : 'rgba(0, 128, 0, 0.35)',
       }}
     >
       +{age}
@@ -21,7 +21,7 @@ const AgeResponse: FC<AgeResponseProps> = ({ response, age }) => (
     <div
       className={styles.alert}
       style={{
-        backgroundColor: response === 'no' ? 'red' : 'rgba(255, 0, 0, 0.35)',
+        backgroundColor: response === '0' ? 'red' : 'rgba(255, 0, 0, 0.35)',
       }}
     >
       under {age}

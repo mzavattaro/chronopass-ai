@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import type { ChangeEvent, FormEvent, FC } from 'react';
 import { toast } from 'sonner';
-import openAI from '@/app/libs/openai';
 import { fileToBase64 } from '@/app/utils/fileToBase64';
 
 import styles from './UploadForm.module.css';
@@ -37,8 +36,20 @@ const UploadForm: FC<UploadFormProps> = ({ age, setResponse }) => {
       try {
         setIsLoading(true);
         const base64Encoded = await fileToBase64(file);
-        const response = await openAI(base64Encoded as string, age);
-        setResponse(response.choices[0].message.content);
+
+        const response = await fetch('/api/openai', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ base64Encoded, age }),
+        });
+
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+
+        setResponse(data.choices[0].message.content);
         toast('File uploaded successfully!', {
           style: {
             background: 'green',
