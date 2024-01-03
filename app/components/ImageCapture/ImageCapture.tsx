@@ -1,86 +1,55 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useRef, useState } from 'react';
 import type { FC } from 'react';
+import Toast from '@/app/components/Toast';
+import { getVideo } from '@/app/utils/getVideo';
+import { paintToCanvas } from '@/app/utils/paintToCanvas';
 
 const ImageCapture: FC = () => {
+  const [response, setResponse] = useState<string | null>('');
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const photoRef = useRef<HTMLCanvasElement | null>(null);
-  const stripRef = useRef(null);
   const colorRef = useRef<HTMLDivElement | null>(null);
 
-  const getVideo = () => {
-    navigator.mediaDevices
-      .getUserMedia({
-        video: { width: { ideal: 1280 }, height: { ideal: 720 }, frameRate: { ideal: 60 } },
-      })
-      .then((stream: MediaStream) => {
-        const video = videoRef.current;
-        if (video) {
-          video.srcObject = stream;
-          video.play();
-        }
-      })
-      .catch((error: Error) => {
-        console.error('error:', error);
+  const takePhoto = async () => {
+    const photo = photoRef.current;
+    const base64Image = photo?.toDataURL('image/jpeg', 1.0);
+
+    try {
+      const res = await fetch('/api/openai', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ base64Image }),
       });
-  };
 
-  useEffect(() => {
-    getVideo();
-  }, []);
+      if (!res.ok) {
+        throw new Error('Network response was not ok');
+      }
 
-  const paintToCanvas = () => {
-    const video = videoRef.current;
-    const photo = photoRef.current;
-    const ctx = photo?.getContext('2d');
-
-    const width = 1280;
-    const height = 720;
-
-    if (photo) {
-      photo.width = width;
-      photo.height = height;
+      const data = await res.json();
+      setResponse(data.choices[0].message.content);
+      <Toast message="File uploaded successfully!" type="success" />;
+    } catch (error) {
+      console.error('Error: ', error);
+      <Toast message="File upload error! Please try again later." type="error" />;
+    } finally {
+      // setIsLoading(false);
     }
-
-    return setInterval(() => {
-      const color = colorRef.current;
-
-      if (video) {
-        ctx?.drawImage(video, 0, 0, width, height);
-      }
-
-      const pixels = ctx?.getImageData(0, 0, width, height);
-
-      if (color) {
-        color.style.backgroundColor = `rgb(${pixels?.data[0]},${pixels?.data[1]},${pixels?.data[2]})`;
-      }
-    }, 0);
-  };
-
-  const takePhoto = () => {
-    const photo = photoRef.current;
-    const strip = stripRef.current;
-
-    const data = photo?.toDataURL('image/jpeg', 1.0);
-
-    console.warn(data);
-    const link = document.createElement('a');
-    link.href = data;
-    link.setAttribute('download', 'myWebcam');
-    link.innerHTML = `<img src='${data}' alt='thumbnail'/>`;
-    strip.insertBefore(link, strip.firstChild);
   };
 
   return (
-    <div className="container">
-      <div className="webcam-video">
-        <button onClick={() => takePhoto()}>Take a photo</button>
-        <video onCanPlay={() => paintToCanvas()} ref={videoRef} className="player" />
-        <canvas ref={photoRef} className="photo" style={{ display: 'none' }} />
-        <div className="photo-booth">
-          <div ref={stripRef} className="strip" />
-        </div>
+    <div>
+      <div>
+        <div>response: {response}</div>
+        <button type="button" onClick={() => getVideo(videoRef)}>
+          Authorize
+        </button>
+        <button type="button" onClick={() => takePhoto()}>
+          Take a photo
+        </button>
+        <video onCanPlay={() => paintToCanvas(videoRef, photoRef, colorRef)} ref={videoRef} />
+        <canvas ref={photoRef} style={{ display: 'none' }} />
       </div>
     </div>
   );
