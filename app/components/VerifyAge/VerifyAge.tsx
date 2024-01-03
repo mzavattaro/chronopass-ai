@@ -2,13 +2,14 @@
 
 import { Group, Input } from '@mantine/core';
 import { useState } from 'react';
-import type { FC, FormEvent } from 'react';
+import { NextPage } from 'next';
+import type { FormEvent } from 'react';
 import UploadForm from '../UploadForm/UploadForm';
 import AgeResponse from '../AgeResponse/AgeResponse';
 
 import styles from './VerifyAge.module.css';
 
-const VerifyAge: FC = () => {
+const VerifyAge: NextPage = () => {
   const [age, setAge] = useState<string>('18');
   const [response, setResponse] = useState<string | null>('');
 
