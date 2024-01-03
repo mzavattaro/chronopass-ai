@@ -22,7 +22,7 @@ export async function POST(req: Request): Promise<Response> {
       {
         role: 'system',
         content:
-          'This is a photo of a person. Be as accurate as possible in your response. Respond with "1" for yes or "0" for no only. No punctuation or capitization and only lowercase in the response. If you do not know, respond with "skip". Return your confidence level in your response as a decimal between 0 and 1',
+          'This is a photo of a person. Be as accurate as possible in your response. Respond with "1" for yes or "0" for no only. No punctuation or capitization and only lowercase in the response. If you do not know, respond with "skip". Return your confidence level in your response as a decimal between 0 and 1.',
       },
       {
         role: 'user',
