@@ -7,11 +7,6 @@ export default function HomePage() {
   const links = [
     {
       id: '1',
-      href: '/file-upload',
-      text: 'File upload',
-    },
-    {
-      id: '2',
       href: '/camera-upload',
       text: 'Camera upload',
     },
