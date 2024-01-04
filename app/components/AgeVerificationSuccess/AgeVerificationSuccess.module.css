@@ -1,0 +1,6 @@
+.title {
+  text-transform: uppercase;
+  max-width: fit-content;
+  line-height: 1.625rem;
+  text-align: center;
+}

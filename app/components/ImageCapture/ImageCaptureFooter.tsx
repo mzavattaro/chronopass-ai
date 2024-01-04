@@ -8,6 +8,7 @@ import { getVideo } from '@/app/utils/getVideo';
 import styles from './ImageCaptureFooter.module.css';
 
 type ImageCaptureFooterProps = {
+  response: string | null;
   isVideoActive: boolean;
   setIsVideoActive: (value: boolean) => void;
   takeImage: () => void;
@@ -15,7 +16,39 @@ type ImageCaptureFooterProps = {
   videoRef: React.RefObject<HTMLVideoElement>;
 };
 
+const ButtonGroup: FC<ImageCaptureFooterProps> = ({
+  response,
+  isVideoActive,
+  setIsVideoActive,
+  takeImage,
+  isLoading,
+  videoRef,
+}) => {
+  if (!response) {
+    return (
+      <div className={styles.buttonGroup}>
+        {isVideoActive ? (
+          <Button leftSection={<UserFocus />} color="#3300FF" onClick={() => takeImage()}>
+            {isLoading ? 'Verifying...' : 'Snap'}
+          </Button>
+        ) : (
+          <Button
+            leftSection={<Authorize />}
+            color="#3300FF"
+            onClick={() => getVideo(videoRef, setIsVideoActive)}
+          >
+            Authorize
+          </Button>
+        )}
+      </div>
+    );
+  }
+
+  return null;
+};
+
 const ImageCaptureFooter: FC<ImageCaptureFooterProps> = ({
+  response,
   isVideoActive,
   setIsVideoActive,
   takeImage,
@@ -32,21 +65,14 @@ const ImageCaptureFooter: FC<ImageCaptureFooterProps> = ({
       </AnchorLink>
     </div>
 
-    <div className={styles.buttonGroup}>
-      {isVideoActive ? (
-        <Button leftSection={<UserFocus />} color="#3300FF" onClick={() => takeImage()}>
-          {isLoading ? 'Verifying...' : 'Snap'}
-        </Button>
-      ) : (
-        <Button
-          leftSection={<Authorize />}
-          color="#3300FF"
-          onClick={() => getVideo(videoRef, setIsVideoActive)}
-        >
-          Authorize
-        </Button>
-      )}
-    </div>
+    <ButtonGroup
+      response={response}
+      isVideoActive={isVideoActive}
+      setIsVideoActive={setIsVideoActive}
+      takeImage={takeImage}
+      isLoading={isLoading}
+      videoRef={videoRef}
+    />
   </div>
 );
 
