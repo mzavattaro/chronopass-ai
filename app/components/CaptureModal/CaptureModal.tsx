@@ -18,18 +18,21 @@ const CaptureModal: FC<CaptureModalProps> = ({ children }) => {
       <Modal
         opened={opened}
         onClose={close}
-        title="Verify age"
+        withCloseButton={false}
+        closeOnClickOutside={false}
+        size={352}
         overlayProps={{
           backgroundOpacity: 0.5,
           blur: 10,
         }}
         classNames={{
-          title: styles.title,
+          body: styles.body,
         }}
+        pos="relative"
       >
         {children}
       </Modal>
-      <Button onClick={open}>Open modal</Button>
+      <Button onClick={open}>Age verification</Button>
     </>
   );
 };

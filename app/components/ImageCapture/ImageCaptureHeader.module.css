@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(to right, #30f, #bd00ff);
+  color: #fff;
+  height: 2.625rem;
+  width: 17rem;
+  padding: 0.625rem 1rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  border-radius: 1000px;
+}
+
+.icon {
+  position: absolute;
+  top: 25%;
+  right: 1rem;
+}

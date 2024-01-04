@@ -1,0 +1,28 @@
+.videoContainer {
+  margin-top: 1rem;
+  border-radius: 0.25rem;
+  width: 20rem;
+  height: 11.25rem;
+}
+
+.imageContainer {
+  position: relative;
+}
+
+.placeholderImage {
+  border-radius: 0.25rem;
+}
+
+.videoWrapper {
+  position: relative;
+}
+
+.video {
+  width: 20rem;
+  height: 11.25rem;
+  border-radius: 0.25rem;
+}
+
+.canvas {
+  display: none;
+}

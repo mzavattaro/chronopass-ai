@@ -1,6 +1,9 @@
 import { streamQuality } from './const';
 
-export const getVideo = (videoRef: React.RefObject<HTMLVideoElement>) => {
+export const getVideo = (
+  videoRef: React.RefObject<HTMLVideoElement>,
+  setIsVideoActive: (isVideoActive: boolean) => void
+) => {
   const { width, height, frameRate } = streamQuality;
 
   navigator.mediaDevices
@@ -15,6 +18,9 @@ export const getVideo = (videoRef: React.RefObject<HTMLVideoElement>) => {
       const video = videoRef.current;
       if (video) {
         video.srcObject = stream;
+        video.onloadeddata = () => {
+          setIsVideoActive(video.readyState === 4);
+        };
         video.play();
       }
     })

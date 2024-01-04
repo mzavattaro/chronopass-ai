@@ -1,6 +1,5 @@
 import React from 'react';
 import { MantineProvider, ColorSchemeScript } from '@mantine/core';
-import { Toaster } from 'sonner';
 import '@mantine/core/styles.css';
 import { theme } from '../theme';
 
@@ -21,10 +20,7 @@ export default function RootLayout({ children }: { children: any }) {
         />
       </head>
       <body>
-        <MantineProvider theme={theme}>
-          {children}
-          <Toaster />
-        </MantineProvider>
+        <MantineProvider theme={theme}>{children}</MantineProvider>
       </body>
     </html>
   );
