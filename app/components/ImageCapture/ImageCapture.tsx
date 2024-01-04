@@ -7,11 +7,12 @@ import LoadingOverlay from '../LoadingOverlay/LoadingOverlay';
 import ImageCaptureHeader from './ImageCaptureHeader';
 import ImageCaptureFooter from './ImageCaptureFooter';
 import ImageCaptureVideo from './ImageCaptureVideo';
+import AgeVerificationSuccess from '../AgeVerificationSuccess/AgeVerificationSuccess';
 
 import styles from './ImageCapture.module.css';
 
 const ImageCapture: FC = () => {
-  const [response, setResponse] = useState<string | null>('');
+  const [response, setResponse] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isVideoActive, setIsVideoActive] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -48,13 +49,25 @@ const ImageCapture: FC = () => {
       <LoadingOverlay isLoading={isLoading} />
       <ImageCaptureHeader />
 
-      <ImageCaptureVideo isVideoActive={isVideoActive} videoRef={videoRef} imageRef={imageRef} />
-
-      <AnchorLink className={styles.anchorLink} href="https://google.com/">
-        <span>camera not working?</span>
-      </AnchorLink>
+      {response ? (
+        <AgeVerificationSuccess className={styles.verificationWrapper}>
+          {response === '1' ? 'successful verification' : 'access denied'}
+        </AgeVerificationSuccess>
+      ) : (
+        <>
+          <ImageCaptureVideo
+            isVideoActive={isVideoActive}
+            videoRef={videoRef}
+            imageRef={imageRef}
+          />
+          <AnchorLink className={styles.anchorLink} href="https://google.com/">
+            <span>camera not working?</span>
+          </AnchorLink>
+        </>
+      )}
 
       <ImageCaptureFooter
+        response={response}
         isVideoActive={isVideoActive}
         setIsVideoActive={setIsVideoActive}
         takeImage={takeImage}
