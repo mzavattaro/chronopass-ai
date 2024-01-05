@@ -4,13 +4,13 @@ import { useRef, useState } from 'react';
 import type { FC } from 'react';
 import AnchorLink from '../Anchor/AnchorLink';
 import LoadingOverlay from '../LoadingOverlay/LoadingOverlay';
-import ImageCaptureHeader from './ImageCaptureHeader';
-import ImageCaptureFooter from './ImageCaptureFooter';
-import ImageCaptureVideo from './ImageCaptureVideo';
+import ImageCaptureHeader from './Header';
+import ImageCaptureFooter from './Footer';
+import ImageCaptureVideo from './VideoStream';
 import AgeVerificationSuccess from '../AgeVerificationSuccess/AgeVerificationSuccess';
 import { getVideo } from '@/app/utils/getVideo';
 
-import styles from './ImageCapture.module.css';
+import styles from './CaptureContainer.module.css';
 
 const ImageCapture: FC = () => {
   const [response, setResponse] = useState<string | null>(null);

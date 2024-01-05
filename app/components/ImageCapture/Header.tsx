@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import Sparks from '@/app/icons/Sparks';
 
-import styles from './ImageCaptureHeader.module.css';
+import styles from './Header.module.css';
 
 const ImageCaptureHeader: FC = () => (
   <div className={styles.container}>

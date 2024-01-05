@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { paintToCanvas } from '@/app/utils/paintToCanvas';
 import Caption from '../Caption/Caption';
 
-import styles from './ImageCaptureVideo.module.css';
+import styles from './VideoStream.module.css';
 
 type ImageCaptureVideoProps = {
   isVideoActive: boolean;

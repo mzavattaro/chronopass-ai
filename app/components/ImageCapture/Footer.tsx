@@ -5,7 +5,7 @@ import UserFocus from '@/app/icons/UserFocus';
 import Authorize from '@/app/icons/Authorize';
 import { getVideo } from '@/app/utils/getVideo';
 
-import styles from './ImageCaptureFooter.module.css';
+import styles from './Footer.module.css';
 
 type ImageCaptureFooterProps = {
   response: string | null;
