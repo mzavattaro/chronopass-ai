@@ -28,7 +28,6 @@ const CaptureModal: FC<CaptureModalProps> = ({ children }) => {
         classNames={{
           body: styles.body,
         }}
-        pos="relative"
       >
         {children}
       </Modal>
