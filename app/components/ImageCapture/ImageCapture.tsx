@@ -8,6 +8,7 @@ import ImageCaptureHeader from './ImageCaptureHeader';
 import ImageCaptureFooter from './ImageCaptureFooter';
 import ImageCaptureVideo from './ImageCaptureVideo';
 import AgeVerificationSuccess from '../AgeVerificationSuccess/AgeVerificationSuccess';
+import { getVideo } from '@/app/utils/getVideo';
 
 import styles from './ImageCapture.module.css';
 
@@ -38,6 +39,7 @@ const ImageCapture: FC = () => {
     } catch (error) {
       console.error('Error: ', error);
     } finally {
+      getVideo(videoRef, setIsVideoActive);
       setIsLoading(false);
     }
   };
