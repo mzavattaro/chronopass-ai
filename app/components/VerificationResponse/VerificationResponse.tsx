@@ -1,14 +1,14 @@
 import type { FC } from 'react';
 import { Title } from '@mantine/core';
 
-import styles from './AgeVerificationSuccess.module.css';
+import styles from './VerificationResponse.module.css';
 
-type AgeVerificationSuccessProps = {
+type VerificationResponseProps = {
   children: React.ReactNode;
   className?: string;
 };
 
-const AgeVerificationSuccess: FC<AgeVerificationSuccessProps> = ({ children, className }) => (
+const VerificationResponse: FC<VerificationResponseProps> = ({ children, className }) => (
   <>
     <Title className={`${className} ${styles.title}`} order={2}>
       {children}
@@ -16,4 +16,4 @@ const AgeVerificationSuccess: FC<AgeVerificationSuccessProps> = ({ children, cla
   </>
 );
 
-export default AgeVerificationSuccess;
+export default VerificationResponse;

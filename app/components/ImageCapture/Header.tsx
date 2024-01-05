@@ -3,7 +3,7 @@ import Sparks from '@/app/icons/Sparks';
 
 import styles from './Header.module.css';
 
-const ImageCaptureHeader: FC = () => (
+const Header: FC = () => (
   <div className={styles.container}>
     <span className={styles.wrapper}>
       <span>Age verification</span>
@@ -14,4 +14,4 @@ const ImageCaptureHeader: FC = () => (
   </div>
 );
 
-export default ImageCaptureHeader;
+export default Header;

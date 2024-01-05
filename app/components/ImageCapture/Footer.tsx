@@ -7,7 +7,7 @@ import { getVideo } from '@/app/utils/getVideo';
 
 import styles from './Footer.module.css';
 
-type ImageCaptureFooterProps = {
+type FooterProps = {
   response: string | null;
   isVideoActive: boolean;
   setIsVideoActive: (value: boolean) => void;
@@ -16,7 +16,7 @@ type ImageCaptureFooterProps = {
   videoRef: React.RefObject<HTMLVideoElement>;
 };
 
-const ButtonGroup: FC<ImageCaptureFooterProps> = ({
+const ButtonGroup: FC<FooterProps> = ({
   response,
   isVideoActive,
   setIsVideoActive,
@@ -47,7 +47,7 @@ const ButtonGroup: FC<ImageCaptureFooterProps> = ({
   return null;
 };
 
-const ImageCaptureFooter: FC<ImageCaptureFooterProps> = ({
+const Footer: FC<FooterProps> = ({
   response,
   isVideoActive,
   setIsVideoActive,
@@ -76,4 +76,4 @@ const ImageCaptureFooter: FC<ImageCaptureFooterProps> = ({
   </div>
 );
 
-export default ImageCaptureFooter;
+export default Footer;

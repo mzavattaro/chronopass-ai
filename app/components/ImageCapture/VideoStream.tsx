@@ -5,13 +5,13 @@ import Caption from '../Caption/Caption';
 
 import styles from './VideoStream.module.css';
 
-type ImageCaptureVideoProps = {
+type VideoStreamProps = {
   isVideoActive: boolean;
   videoRef: React.RefObject<HTMLVideoElement>;
   imageRef: React.RefObject<HTMLCanvasElement>;
 };
 
-const ImageCaptureVideo: FC<ImageCaptureVideoProps> = ({ isVideoActive, videoRef, imageRef }) => {
+const VideoStream: FC<VideoStreamProps> = ({ isVideoActive, videoRef, imageRef }) => {
   const colorRef = useRef<HTMLDivElement | null>(null);
 
   return (
@@ -52,4 +52,4 @@ const ImageCaptureVideo: FC<ImageCaptureVideoProps> = ({ isVideoActive, videoRef
   );
 };
 
-export default ImageCaptureVideo;
+export default VideoStream;

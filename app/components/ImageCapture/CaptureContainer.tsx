@@ -4,15 +4,15 @@ import { useRef, useState } from 'react';
 import type { FC } from 'react';
 import AnchorLink from '../Anchor/AnchorLink';
 import LoadingOverlay from '../LoadingOverlay/LoadingOverlay';
-import ImageCaptureHeader from './Header';
-import ImageCaptureFooter from './Footer';
-import ImageCaptureVideo from './VideoStream';
-import AgeVerificationSuccess from '../AgeVerificationSuccess/AgeVerificationSuccess';
+import Header from './Header';
+import Footer from './Footer';
+import VideoStream from './VideoStream';
+import VerificationResponse from '../VerificationResponse/VerificationResponse';
 import { getVideo } from '@/app/utils/getVideo';
 
 import styles from './CaptureContainer.module.css';
 
-const ImageCapture: FC = () => {
+const CaptureContainer: FC = () => {
   const [response, setResponse] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isVideoActive, setIsVideoActive] = useState(false);
@@ -49,26 +49,22 @@ const ImageCapture: FC = () => {
   return (
     <div className={styles.container}>
       <LoadingOverlay isLoading={isLoading} />
-      <ImageCaptureHeader />
+      <Header />
 
       {response ? (
-        <AgeVerificationSuccess className={styles.verificationWrapper}>
+        <VerificationResponse className={styles.verificationWrapper}>
           {response === '1' ? 'successful verification' : 'access denied'}
-        </AgeVerificationSuccess>
+        </VerificationResponse>
       ) : (
         <>
-          <ImageCaptureVideo
-            isVideoActive={isVideoActive}
-            videoRef={videoRef}
-            imageRef={imageRef}
-          />
+          <VideoStream isVideoActive={isVideoActive} videoRef={videoRef} imageRef={imageRef} />
           <AnchorLink className={styles.anchorLink} href="https://google.com/">
             <span>camera not working?</span>
           </AnchorLink>
         </>
       )}
 
-      <ImageCaptureFooter
+      <Footer
         response={response}
         isVideoActive={isVideoActive}
         setIsVideoActive={setIsVideoActive}
@@ -80,4 +76,4 @@ const ImageCapture: FC = () => {
   );
 };
 
-export default ImageCapture;
+export default CaptureContainer;
