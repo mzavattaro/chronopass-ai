@@ -33,6 +33,7 @@ const ButtonGroup: FC<FooterProps> = ({
           </Button>
         ) : (
           <Button
+            data-autofocus
             leftSection={<Authorize />}
             color="#3300FF"
             onClick={() => getVideo(videoRef, setIsVideoActive)}
