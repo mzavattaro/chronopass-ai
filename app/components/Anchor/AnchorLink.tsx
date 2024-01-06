@@ -1,5 +1,6 @@
 import type { FC } from 'react';
 import { Anchor } from '@mantine/core';
+
 import styles from './AnchorLink.module.css';
 
 type AnchorLinkProps = {

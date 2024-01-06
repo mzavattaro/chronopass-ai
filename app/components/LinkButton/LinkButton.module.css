@@ -1,0 +1,12 @@
+.button {
+  background: none;
+  border: none;
+  color: #9798b1;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: underline;
+  display: inline-block;
+  font-size: 0.5rem;
+  font-weight: 800;
+  cursor: pointer;
+}

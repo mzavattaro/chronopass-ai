@@ -16,3 +16,8 @@
 .verificationWrapper {
   padding-top: 2rem;
 }
+
+.manualVerificationWrapper {
+  padding-top: 1.5rem;
+  width: 100%;
+}
